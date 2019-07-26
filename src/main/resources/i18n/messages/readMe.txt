@@ -1,0 +1,2 @@
+如果需要扩展语言,可再建对应语言文件
+格式例如:messages_zh_CN.properties,messages_en_US.properties
