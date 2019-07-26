@@ -42,7 +42,7 @@ public class RubbishCategoryService extends BaseService {
         return response;
     }
 
-    public Response<ValueVo<Boolean>> createRubbishCategory(String categoryName) {
+    public Response<ValueVo<Boolean>> createRubbishCategory(String categoryName, String description) {
         Response<ValueVo<Boolean>> response = new Response<>();
         response.setData(new ValueVo(false));
         List<SearchVo> searchParams = new ArrayList<>();
@@ -55,6 +55,7 @@ public class RubbishCategoryService extends BaseService {
 
         RubbishCategory category = new RubbishCategory();
         category.setCategoryName(categoryName);
+        category.setDescription(description);
         category.setStatus(1);
         category = rubbishCategoryRepository.save(category);
         if (category != null && category.getId() != null) {
@@ -64,7 +65,7 @@ public class RubbishCategoryService extends BaseService {
     }
 
     @Transactional
-    public Response<ValueVo<Boolean>> modifyRubbishCategory(Long id, String categoryName) {
+    public Response<ValueVo<Boolean>> modifyRubbishCategory(Long id, String categoryName, String description) {
         Response<ValueVo<Boolean>> response = new Response<>();
         response.setData(new ValueVo(false));
         List<SearchVo> searchParams = new ArrayList<>();
@@ -77,6 +78,9 @@ public class RubbishCategoryService extends BaseService {
         RubbishCategory category = rubbishCategoryRepository.findOne(id);
         if (category != null) {
             category.setCategoryName(categoryName);
+            if (!StringUtils.isBlank(description)) {
+                category.setDescription(description);
+            }
             category = rubbishCategoryRepository.save(category);
             if (category != null && category.getId() != null) {
                 response.setData(new ValueVo(true));

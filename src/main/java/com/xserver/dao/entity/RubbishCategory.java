@@ -11,6 +11,8 @@ public class RubbishCategory extends IdEntity {
     @Column(length = 50, nullable = false)
     private String categoryName;// 垃圾分类名称
     @Column
+    private String description;// 分类描述
+    @Column
     private int status;// 0-禁用 1-正常 4-删除
 
     public String getCategoryName() {
@@ -19,6 +21,14 @@ public class RubbishCategory extends IdEntity {
 
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public int getStatus() {

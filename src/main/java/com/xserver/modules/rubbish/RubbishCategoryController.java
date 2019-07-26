@@ -32,15 +32,17 @@ public class RubbishCategoryController extends BaseController {
     @ApiOperation(value = "分类创建", notes = "/category/create")
     @RequestMapping(value = "/category/create", method = { RequestMethod.POST, RequestMethod.GET })
     public Response<ValueVo<Boolean>> categoryCreate(
-            @ApiParam(value = "分类名称", required = true) @RequestParam(value = "categoryName") String categoryName) {
-        return rubbishCategoryService.createRubbishCategory(categoryName);
+            @ApiParam(value = "分类名称", required = true) @RequestParam(value = "categoryName") String categoryName,
+            @ApiParam(value = "分类描述") @RequestParam(value = "description", required = false) String description) {
+        return rubbishCategoryService.createRubbishCategory(categoryName, description);
     }
 
     @ApiOperation(value = "分类编辑", notes = "/category/edit")
     @RequestMapping(value = "/category/edit", method = { RequestMethod.POST, RequestMethod.GET })
     public Response<ValueVo<Boolean>> categoryEdit(@RequestParam(value = "id") Long id,
-            @ApiParam(value = "分类名称", required = true) @RequestParam(value = "categoryName") String categoryName) {
-        return rubbishCategoryService.modifyRubbishCategory(id, categoryName);
+            @ApiParam(value = "分类名称", required = true) @RequestParam(value = "categoryName") String categoryName,
+            @ApiParam(value = "分类描述") @RequestParam(value = "description", required = false) String description) {
+        return rubbishCategoryService.modifyRubbishCategory(id, categoryName, description);
     }
 
     @ApiOperation(value = "分类删除", notes = "/category/del")
