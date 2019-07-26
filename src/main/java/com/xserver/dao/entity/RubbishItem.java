@@ -4,10 +4,10 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "rubbish_item", indexes = {@Index(name = "Fk_rubbishItemid", columnList = "id")})
+@Table(name = "rubbish_item", indexes = { @Index(name = "Fk_rubbishItemid", columnList = "id") })
 public class RubbishItem extends IdEntity {
     @Column(length = 50, nullable = false)
-    private String itemName;//名称
+    private String itemName;// 名称
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
     private RubbishCategory belongCategory;// 所属分类

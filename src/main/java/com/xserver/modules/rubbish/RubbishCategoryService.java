@@ -47,7 +47,8 @@ public class RubbishCategoryService extends BaseService {
         response.setData(new ValueVo(false));
         List<SearchVo> searchParams = new ArrayList<>();
         searchParams.add(new SearchVo("categoryName", Op.EQ, categoryName));
-        List<RubbishCategory> list = rubbishCategoryRepository.findAll(SpecUtils.buildSearchParams(RubbishCategory.class, searchParams));
+        List<RubbishCategory> list = rubbishCategoryRepository.findAll(SpecUtils.buildSearchParams(
+                RubbishCategory.class, searchParams));
         if (!CollectionUtils.isEmpty(list)) {
             return error(EC_RUBBISH_CATEGORY_NAME_REPEAT_ERROR);
         }
@@ -68,7 +69,8 @@ public class RubbishCategoryService extends BaseService {
         response.setData(new ValueVo(false));
         List<SearchVo> searchParams = new ArrayList<>();
         searchParams.add(new SearchVo("categoryName", Op.EQ, categoryName));
-        List<RubbishCategory> list = rubbishCategoryRepository.findAll(SpecUtils.buildSearchParams(RubbishCategory.class, searchParams));
+        List<RubbishCategory> list = rubbishCategoryRepository.findAll(SpecUtils.buildSearchParams(
+                RubbishCategory.class, searchParams));
         if (!CollectionUtils.isEmpty(list)) {
             return error(EC_RUBBISH_CATEGORY_NAME_REPEAT_ERROR);
         }
@@ -90,7 +92,8 @@ public class RubbishCategoryService extends BaseService {
         RubbishCategory category = rubbishCategoryRepository.findOne(id);
         List<SearchVo> searchParams = new ArrayList<>();
         searchParams.add(new SearchVo("belongCategory", Op.EQ, category.getId()));
-        List<RubbishItem> listI = rubbishItemRepository.findAll(SpecUtils.buildSearchParams(RubbishItem.class, searchParams));
+        List<RubbishItem> listI = rubbishItemRepository.findAll(SpecUtils.buildSearchParams(RubbishItem.class,
+                searchParams));
         if (!CollectionUtils.isEmpty(listI)) {
             return error(EC_RUBBISH_CATEGORY_BIND_ITEM_ERROR);
         }
@@ -109,7 +112,8 @@ public class RubbishCategoryService extends BaseService {
             searchParams.add(new SearchVo("categoryName", Op.LIKE, condition));
         }
 
-        List<RubbishCategory> list = rubbishCategoryRepository.findAll(SpecUtils.buildSearchParams(RubbishCategory.class, searchParams));
+        List<RubbishCategory> list = rubbishCategoryRepository.findAll(SpecUtils.buildSearchParams(
+                RubbishCategory.class, searchParams));
         List<RubbishCategoryVo> voList = new ArrayList<>();
         if (!CollectionUtils.isEmpty(list)) {
             for (RubbishCategory rubbishCategory : list) {
@@ -119,7 +123,6 @@ public class RubbishCategoryService extends BaseService {
         response.setData(voList);
         return response;
     }
-
 
     private RubbishCategoryVo getRubbishCategoryVo(RubbishCategory rubbishCategory) {
         RubbishCategoryVo vo = RubbishCategoryVo.entityToVo(rubbishCategory);

@@ -6,7 +6,7 @@ import javax.persistence.Index;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "rubbish_category", indexes = {@Index(name = "Fk_rubbishCategoryid", columnList = "id")})
+@Table(name = "rubbish_category", indexes = { @Index(name = "Fk_rubbishCategoryid", columnList = "id") })
 public class RubbishCategory extends IdEntity {
     @Column(length = 50, nullable = false)
     private String categoryName;// 垃圾分类名称

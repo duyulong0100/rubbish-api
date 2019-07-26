@@ -5,7 +5,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;
 
 @Api("RubbishCategory Class")
-public class RubbishCategoryVo extends BaseVo  {
+public class RubbishCategoryVo extends BaseVo {
 
     @ApiModelProperty("id")
     private long id;
@@ -14,7 +14,7 @@ public class RubbishCategoryVo extends BaseVo  {
     @ApiModelProperty("状态 0-禁用 1-正常 4-删除")
     private int status;
 
-    public static RubbishCategoryVo entityToVo(RubbishCategory rubbishCategory){
+    public static RubbishCategoryVo entityToVo(RubbishCategory rubbishCategory) {
         RubbishCategoryVo vo = new RubbishCategoryVo();
         vo.setId(rubbishCategory.getId());
         vo.setCategoryName(rubbishCategory.getCategoryName());

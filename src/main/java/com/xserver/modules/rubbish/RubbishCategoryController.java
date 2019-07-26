@@ -17,41 +17,40 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/rubbish")
-@Api(tags = {"垃圾分类信息接口"})
+@Api(tags = { "垃圾分类信息接口" })
 public class RubbishCategoryController extends BaseController {
 
     @Autowired
     private RubbishCategoryService rubbishCategoryService;
 
     @ApiOperation(value = "分类查询", notes = "/category/get")
-    @RequestMapping(value = "/category/get", method = {RequestMethod.POST, RequestMethod.GET})
+    @RequestMapping(value = "/category/get", method = { RequestMethod.POST, RequestMethod.GET })
     public Response<RubbishCategoryVo> itemGet(@RequestParam(value = "id") Long id) {
         return rubbishCategoryService.getRubbishCategory(id);
     }
 
     @ApiOperation(value = "分类创建", notes = "/category/create")
-    @RequestMapping(value = "/category/create", method = {RequestMethod.POST, RequestMethod.GET})
+    @RequestMapping(value = "/category/create", method = { RequestMethod.POST, RequestMethod.GET })
     public Response<ValueVo<Boolean>> categoryCreate(
             @ApiParam(value = "分类名称", required = true) @RequestParam(value = "categoryName") String categoryName) {
         return rubbishCategoryService.createRubbishCategory(categoryName);
     }
 
     @ApiOperation(value = "分类编辑", notes = "/category/edit")
-    @RequestMapping(value = "/category/edit", method = {RequestMethod.POST, RequestMethod.GET})
-    public Response<ValueVo<Boolean>> categoryEdit(
-            @RequestParam(value = "id") Long id,
+    @RequestMapping(value = "/category/edit", method = { RequestMethod.POST, RequestMethod.GET })
+    public Response<ValueVo<Boolean>> categoryEdit(@RequestParam(value = "id") Long id,
             @ApiParam(value = "分类名称", required = true) @RequestParam(value = "categoryName") String categoryName) {
         return rubbishCategoryService.modifyRubbishCategory(id, categoryName);
     }
 
     @ApiOperation(value = "分类删除", notes = "/category/del")
-    @RequestMapping(value = "/category/del", method = {RequestMethod.POST, RequestMethod.GET})
+    @RequestMapping(value = "/category/del", method = { RequestMethod.POST, RequestMethod.GET })
     public Response<ValueVo<Boolean>> categoryDel(@RequestParam(value = "id") Long id) {
         return rubbishCategoryService.delRubbishCategory(id);
     }
 
     @ApiOperation(value = "分类列表", notes = "/category/list")
-    @RequestMapping(value = "/category/list", method = {RequestMethod.POST, RequestMethod.GET})
+    @RequestMapping(value = "/category/list", method = { RequestMethod.POST, RequestMethod.GET })
     public Response<List<RubbishCategoryVo>> roleList(
             @ApiParam(value = "名称作条件查询") @RequestParam(value = "condition", required = false) String condition) {
         return rubbishCategoryService.listRubbishCategory(condition);
