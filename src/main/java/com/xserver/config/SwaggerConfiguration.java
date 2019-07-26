@@ -18,9 +18,6 @@ public class SwaggerConfiguration {
     @Value("${swagger.host}")
     private String host;
 
-    @Value("${swagger.title}")
-    private String title;
-
     @Bean
     public Docket buildDocket() {
         String basePackage = "com.xserver";
@@ -31,7 +28,7 @@ public class SwaggerConfiguration {
     }
 
     public ApiInfo buildApiInfo() {
-        return new ApiInfoBuilder().title(title).version("1.0").build();
+        return new ApiInfoBuilder().title("垃圾分类指南API文档").version("1.0").build();
     }
 
 }
