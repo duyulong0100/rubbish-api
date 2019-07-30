@@ -14,6 +14,10 @@ import com.xserver.vo.ValueVo;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -108,23 +112,26 @@ public class RubbishCategoryService extends BaseService {
         return response;
     }
 
-    public Response<List<RubbishCategoryVo>> listRubbishCategory(String condition) {
+    public Response<List<RubbishCategoryVo>> listRubbishCategory(int page, int size, String condition) {
         Response<List<RubbishCategoryVo>> response = new Response<>();
+        Pageable pageable = new PageRequest((page - 1) >= 0 ? (page - 1) : 0, size, Sort.Direction.ASC, "id");
         List<SearchVo> searchParams = new ArrayList<>();
         searchParams.add(new SearchVo("status", Op.EQ, 1));
         if (!StringUtils.isBlank(condition)) {
             searchParams.add(new SearchVo("categoryName", Op.LIKE, condition));
         }
 
-        List<RubbishCategory> list = rubbishCategoryRepository.findAll(SpecUtils.buildSearchParams(
-                RubbishCategory.class, searchParams));
+        Page<RubbishCategory> pageRC = rubbishCategoryRepository.findAll(SpecUtils.buildSearchParams(
+                RubbishCategory.class, searchParams), pageable);
         List<RubbishCategoryVo> voList = new ArrayList<>();
-        if (!CollectionUtils.isEmpty(list)) {
-            for (RubbishCategory rubbishCategory : list) {
+        if (pageRC != null && !CollectionUtils.isEmpty(pageRC.getContent())) {
+            for (RubbishCategory rubbishCategory : pageRC.getContent()) {
                 voList.add(RubbishCategoryVo.entityToVo(rubbishCategory));
             }
         }
         response.setData(voList);
+        response.extraField("pageNo", page).extraField("pageSize", size)
+                .extraField("totalCount", pageRC.getTotalElements()).extraField("totalPage", pageRC.getTotalPages());
         return response;
     }
 

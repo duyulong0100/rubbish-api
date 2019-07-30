@@ -53,8 +53,10 @@ public class RubbishCategoryController extends BaseController {
 
     @ApiOperation(value = "分类列表", notes = "/category/list")
     @RequestMapping(value = "/category/list", method = { RequestMethod.POST, RequestMethod.GET })
-    public Response<List<RubbishCategoryVo>> roleList(
+    public Response<List<RubbishCategoryVo>> categoryList(
+            @RequestParam(value = "page", required = false, defaultValue = "1") int page,
+            @RequestParam(value = "size", required = false, defaultValue = "10") int size,
             @ApiParam(value = "名称作条件查询") @RequestParam(value = "condition", required = false) String condition) {
-        return rubbishCategoryService.listRubbishCategory(condition);
+        return rubbishCategoryService.listRubbishCategory(page, size, condition);
     }
 }

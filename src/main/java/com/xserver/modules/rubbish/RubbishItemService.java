@@ -14,6 +14,10 @@ import com.xserver.vo.ValueVo;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -124,8 +128,9 @@ public class RubbishItemService extends BaseService {
         return response;
     }
 
-    public Response<List<RubbishItemVo>> listRubbishItem(String condition, Long categoryId) {
+    public Response<List<RubbishItemVo>> listRubbishItem(int page, int size, String condition, Long categoryId) {
         Response<List<RubbishItemVo>> response = new Response<>();
+        Pageable pageable = new PageRequest((page - 1) >= 0 ? (page - 1) : 0, size, Sort.Direction.ASC, "id");
         List<SearchVo> searchParams = new ArrayList<>();
         searchParams.add(new SearchVo("status", Op.IN, new Object[] { 0, 1 }));
         if (!StringUtils.isBlank(condition)) {
@@ -134,15 +139,17 @@ public class RubbishItemService extends BaseService {
         if (categoryId != null && categoryId != 0) {
             searchParams.add(new SearchVo("belongCategory", Op.EQ, categoryId));
         }
-        List<RubbishItem> list = rubbishItemRepository.findAll(SpecUtils.buildSearchParams(RubbishItem.class,
-                searchParams));
+        Page<RubbishItem> pageRI = rubbishItemRepository.findAll(SpecUtils.buildSearchParams(RubbishItem.class,
+                searchParams), pageable);
         List<RubbishItemVo> voList = new ArrayList<>();
-        if (!CollectionUtils.isEmpty(list)) {
-            for (RubbishItem rubbishItem : list) {
+        if (pageRI != null && !CollectionUtils.isEmpty(pageRI.getContent())) {
+            for (RubbishItem rubbishItem : pageRI.getContent()) {
                 voList.add(getRubbishItemVo(rubbishItem));
             }
         }
         response.setData(voList);
+        response.extraField("pageNo", page).extraField("pageSize", size)
+                .extraField("totalCount", pageRI.getTotalElements()).extraField("totalPage", pageRI.getTotalPages());
         return response;
     }
 
