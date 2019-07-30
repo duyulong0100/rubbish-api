@@ -121,8 +121,8 @@ public class RubbishCategoryService extends BaseService {
             searchParams.add(new SearchVo("categoryName", Op.LIKE, condition));
         }
 
-        Page<RubbishCategory> pageRC = rubbishCategoryRepository.findAll(SpecUtils.buildSearchParams(
-                RubbishCategory.class, searchParams), pageable);
+        Page<RubbishCategory> pageRC = rubbishCategoryRepository.findAll(
+                SpecUtils.buildSearchParams(RubbishCategory.class, searchParams), pageable);
         List<RubbishCategoryVo> voList = new ArrayList<>();
         if (pageRC != null && !CollectionUtils.isEmpty(pageRC.getContent())) {
             for (RubbishCategory rubbishCategory : pageRC.getContent()) {
