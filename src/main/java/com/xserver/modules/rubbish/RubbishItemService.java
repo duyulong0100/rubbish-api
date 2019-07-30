@@ -80,7 +80,7 @@ public class RubbishItemService extends BaseService {
         Response<ValueVo<Boolean>> response = new Response<>();
         response.setData(new ValueVo(false));
         List<SearchVo> searchParams = new ArrayList<>();
-        searchParams.add(new SearchVo("categoryName", Op.EQ, itemName));
+        searchParams.add(new SearchVo("itemName", Op.EQ, itemName));
         List<RubbishItem> list = rubbishItemRepository.findAll(SpecUtils.buildSearchParams(RubbishItem.class,
                 searchParams));
         boolean isRepeat = false;
