@@ -76,7 +76,16 @@ public class RubbishCategoryService extends BaseService {
         searchParams.add(new SearchVo("categoryName", Op.EQ, categoryName));
         List<RubbishCategory> list = rubbishCategoryRepository.findAll(SpecUtils.buildSearchParams(
                 RubbishCategory.class, searchParams));
+        boolean isRepeat = false;
         if (!CollectionUtils.isEmpty(list)) {
+            for (RubbishCategory category : list) {
+                if (category.getId().compareTo(id) != 0) {
+                    isRepeat = true;
+                    break;
+                }
+            }
+        }
+        if (isRepeat) {
             return error(EC_RUBBISH_CATEGORY_NAME_REPEAT_ERROR);
         }
         RubbishCategory category = rubbishCategoryRepository.findOne(id);
