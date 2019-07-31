@@ -1,15 +1,15 @@
 package com.xserver.config;
 
-import java.util.List;
-
+import com.xserver.common.Session;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
-import com.xserver.common.Session;
+import java.util.List;
 
 @Configuration
 public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
@@ -34,5 +34,14 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
         registry.addResourceHandler("/html/**").addResourceLocations("classpath:/static/html/");
         registry.addResourceHandler("/others/**").addResourceLocations("classpath:/static/others/");
         registry.addResourceHandler("/web/**").addResourceLocations("classpath:/static/web/");
+    }
+
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**")
+                .allowedOrigins("*")
+                .allowCredentials(true)
+                .allowedMethods("GET", "POST", "DELETE", "PUT")
+                .maxAge(3600);
     }
 }
