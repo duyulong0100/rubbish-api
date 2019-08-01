@@ -122,13 +122,13 @@ public class RubbishCategoryService extends BaseService {
         return response;
     }
 
-    public Response<List<RubbishCategoryVo>> listRubbishCategory(int page, int size, String condition) {
+    public Response<List<RubbishCategoryVo>> listRubbishCategory(int page, int size, String keyword) {
         Response<List<RubbishCategoryVo>> response = new Response<>();
         Pageable pageable = new PageRequest((page - 1) >= 0 ? (page - 1) : 0, size, Sort.Direction.ASC, "id");
         List<SearchVo> searchParams = new ArrayList<>();
         searchParams.add(new SearchVo("status", Op.EQ, 1));
-        if (!StringUtils.isBlank(condition)) {
-            searchParams.add(new SearchVo("categoryName", Op.LIKE, condition));
+        if (!StringUtils.isBlank(keyword)) {
+            searchParams.add(new SearchVo("categoryName", Op.LIKE, keyword));
         }
 
         Page<RubbishCategory> pageRC = rubbishCategoryRepository.findAll(

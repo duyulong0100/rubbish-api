@@ -58,7 +58,7 @@ public class RubbishCategoryController extends BaseController {
     public Response<List<RubbishCategoryVo>> categoryList(
             @RequestParam(value = "page", required = false, defaultValue = "1") int page,
             @RequestParam(value = "size", required = false, defaultValue = "10") int size,
-            @ApiParam(value = "名称作条件查询") @RequestParam(value = "condition", required = false) String condition) {
-        return rubbishCategoryService.listRubbishCategory(page, size, condition);
+            @ApiParam(value = "名称作条件查询") @RequestParam(value = "keyword", required = false) String keyword) {
+        return rubbishCategoryService.listRubbishCategory(page, size, keyword);
     }
 }

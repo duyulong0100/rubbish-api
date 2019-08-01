@@ -58,8 +58,8 @@ public class RubbishItemController extends BaseController {
     public Response<List<RubbishItemVo>> itemList(
             @RequestParam(value = "page", required = false, defaultValue = "1") int page,
             @RequestParam(value = "size", required = false, defaultValue = "10") int size,
-            @ApiParam(value = "名称作条件查询") @RequestParam(value = "condition", required = false) String condition,
+            @ApiParam(value = "名称作条件查询") @RequestParam(value = "keyword", required = false) String keyword,
             @ApiParam(value = "所属分类") @RequestParam(value = "categoryId", required = false) Long categoryId) {
-        return rubbishItemService.listRubbishItem(page, size, condition, categoryId);
+        return rubbishItemService.listRubbishItem(page, size, keyword, categoryId);
     }
 }
