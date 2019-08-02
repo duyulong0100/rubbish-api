@@ -13,6 +13,8 @@ public class RubbishCategory extends IdEntity {
     @Column
     private String description;// 分类描述
     @Column
+    private String picUrl;// 分类图
+    @Column
     private int status;// 0-禁用 1-正常 4-删除
 
     public String getCategoryName() {
@@ -29,6 +31,14 @@ public class RubbishCategory extends IdEntity {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getPicUrl() {
+        return picUrl;
+    }
+
+    public void setPicUrl(String picUrl) {
+        this.picUrl = picUrl;
     }
 
     public int getStatus() {

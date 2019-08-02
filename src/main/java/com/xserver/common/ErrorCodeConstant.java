@@ -12,4 +12,6 @@ public class ErrorCodeConstant {
     public static final int EC_RUBBISH_CATEGORY_BIND_ITEM_ERROR = 1000002;// 分类下有垃圾信息，不可删除
 
     public static final int EC_RUBBISH_ITEM_NAME_REPEAT_ERROR = 2000001;// 垃圾名称重复
+
+    public static final int EC_COMMON_FILE_UPLOAD_ERR = 9000001;// 文件上传失败
 }

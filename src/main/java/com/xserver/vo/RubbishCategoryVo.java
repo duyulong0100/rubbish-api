@@ -13,6 +13,8 @@ public class RubbishCategoryVo extends BaseVo {
     private String categoryName;
     @ApiModelProperty("描述")
     private String description;
+    @ApiModelProperty("图")
+    private String picUrl;
     @ApiModelProperty("状态 0-禁用 1-正常 4-删除")
     private int status;
 
@@ -21,6 +23,7 @@ public class RubbishCategoryVo extends BaseVo {
         vo.setId(rubbishCategory.getId());
         vo.setCategoryName(rubbishCategory.getCategoryName());
         vo.setDescription(rubbishCategory.getDescription());
+        vo.setPicUrl(rubbishCategory.getPicUrl());
         vo.setStatus(rubbishCategory.getStatus());
         return vo;
     }
@@ -47,6 +50,14 @@ public class RubbishCategoryVo extends BaseVo {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getPicUrl() {
+        return picUrl;
+    }
+
+    public void setPicUrl(String picUrl) {
+        this.picUrl = picUrl;
     }
 
     public int getStatus() {

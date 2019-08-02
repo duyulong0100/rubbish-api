@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/rubbish")
+@RequestMapping("/api/rubbish")
 @Api(tags = { "垃圾分类信息接口" })
 public class RubbishCategoryController extends BaseController {
 
@@ -34,8 +34,9 @@ public class RubbishCategoryController extends BaseController {
     public Response<ValueVo<Boolean>> categoryCreate(
             @ApiParam(value = "分类名称", required = true) @RequestParam(value = "categoryName") String categoryName,
             @ApiParam(value = "分类描述") @RequestParam(value = "description", required = false) String description,
+            @ApiParam(value = "分类图") @RequestParam(value = "picUrl", required = false) String picUrl,
             @ApiParam(value = "状态") @RequestParam(value = "status", required = false, defaultValue = "1") int status) {
-        return rubbishCategoryService.createRubbishCategory(categoryName, description, status);
+        return rubbishCategoryService.createRubbishCategory(categoryName, description, picUrl, status);
     }
 
     @ApiOperation(value = "分类编辑", notes = "/category/edit")
@@ -43,8 +44,9 @@ public class RubbishCategoryController extends BaseController {
     public Response<ValueVo<Boolean>> categoryEdit(@RequestParam(value = "id") Long id,
             @ApiParam(value = "分类名称", required = true) @RequestParam(value = "categoryName") String categoryName,
             @ApiParam(value = "分类描述") @RequestParam(value = "description", required = false) String description,
+            @ApiParam(value = "分类图") @RequestParam(value = "picUrl", required = false) String picUrl,
             @ApiParam(value = "状态") @RequestParam(value = "status", required = false, defaultValue = "1") int status) {
-        return rubbishCategoryService.modifyRubbishCategory(id, categoryName, description, status);
+        return rubbishCategoryService.modifyRubbishCategory(id, categoryName, description, picUrl, status);
     }
 
     @ApiOperation(value = "分类删除", notes = "/category/del")
