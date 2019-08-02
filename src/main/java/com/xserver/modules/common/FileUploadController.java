@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 @RestController
-@RequestMapping("/api/file")
+@RequestMapping("/file")
 @Api(tags = { "文件上传接口文档" })
 public class FileUploadController extends BaseController {
 

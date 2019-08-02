@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/rubbish")
+@RequestMapping("/rubbish")
 @Api(tags = { "垃圾分类信息接口" })
 public class RubbishCategoryController extends BaseController {
 
