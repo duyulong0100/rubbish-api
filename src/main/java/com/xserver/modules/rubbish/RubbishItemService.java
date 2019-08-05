@@ -134,7 +134,7 @@ public class RubbishItemService extends BaseService {
         List<SearchVo> searchParams = new ArrayList<>();
         searchParams.add(new SearchVo("status", Op.IN, new Object[] { 0, 1 }));
         if (!StringUtils.isBlank(keyword)) {
-            searchParams.add(new SearchVo("itemCategory", Op.LIKE, keyword));
+            searchParams.add(new SearchVo("itemName", Op.LIKE, keyword));
         }
         if (categoryId != null && categoryId != 0) {
             searchParams.add(new SearchVo("belongCategory", Op.EQ, categoryId));

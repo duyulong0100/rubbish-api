@@ -4,14 +4,12 @@ import com.xserver.common.BaseController;
 import com.xserver.common.Response;
 import com.xserver.vo.RubbishItemVo;
 import com.xserver.vo.ValueVo;
+import com.xserver.vo.request.RubbishSearchReqVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -54,12 +52,20 @@ public class RubbishItemController extends BaseController {
     }
 
     @ApiOperation(value = "垃圾信息列表", notes = "/item/list")
-    @RequestMapping(value = "/item/list", method = { RequestMethod.POST, RequestMethod.GET })
-    public Response<List<RubbishItemVo>> itemList(
+    @RequestMapping(value = "/item/list", method = { RequestMethod.GET })
+    public Response<List<RubbishItemVo>> itemListGet(
             @RequestParam(value = "page", required = false, defaultValue = "1") int page,
             @RequestParam(value = "size", required = false, defaultValue = "10") int size,
             @ApiParam(value = "名称作条件查询") @RequestParam(value = "keyword", required = false) String keyword,
             @ApiParam(value = "所属分类") @RequestParam(value = "categoryId", required = false) Long categoryId) {
         return rubbishItemService.listRubbishItem(page, size, keyword, categoryId);
+    }
+
+    @ApiOperation(value = "垃圾信息列表", notes = "/item/list")
+    @RequestMapping(value = "/item/list", method = { RequestMethod.POST })
+    public Response<List<RubbishItemVo>> itemListPost(
+            @ApiParam(value = "查询条件") @RequestBody RubbishSearchReqVo searchReqVo) {
+        return rubbishItemService.listRubbishItem(searchReqVo.getPage(), searchReqVo.getSize(),
+                searchReqVo.getKeyword(), searchReqVo.getCategoryId());
     }
 }
